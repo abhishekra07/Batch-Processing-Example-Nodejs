@@ -28,7 +28,6 @@ processMessage = async (msg) => {
     return new Promise(async (resolve) => {
         let rand = Math.random() * 4;
         rand = Math.floor(rand);
-        console.log('rand ',rand)
         console.log(colorsArray[rand], `${new Date()} | Logging | ${msg}`)
         resolve('resolved')
     })
