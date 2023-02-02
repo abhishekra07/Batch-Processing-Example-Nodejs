@@ -15,8 +15,12 @@ exports.monitorQueue = async (queue) => {
     }
 }
 
+/**
+ * Push incoming requests to Batch Queue for processing
+ */
 pushToBatchQueue = async (queue) => {
-    let spaceRemaining = process.env.BATCH_SIZE - batchQueue.length; //calculate space remaining to push into batch queue
-    let noOfJobsToPush = Math.min(queue.length, spaceRemaining); //
-
+    let spaceRemaining = process.env.BATCH_SIZE - batchQueue.length //calculate space remaining to push into batch queue
+    let noOfJobsToPush = Math.min(queue.length, spaceRemaining) // calculate how many no of records to pop
+    let jobs = queue.splice(0, noOfJobsToPush) // jobs to push
+    batchQueue.push(...jobs); // adding jobs to batchQueue for processing
 }
