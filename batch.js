@@ -51,6 +51,6 @@ clearBatchQueue = async () => {
     batchQueue.splice(0, batchQueue.length)
 }
 
-exports.createJob = async (job) => {
-    return { runJob: job }
+exports.createJob = (runJob) => {
+    return { runJob }
 }
