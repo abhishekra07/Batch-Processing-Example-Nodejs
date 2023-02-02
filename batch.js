@@ -34,5 +34,12 @@ getNoOfSeconds = async () => {
 
 processBatchRequests = async (queue) => {
     batchStatus = Constants.PROCESSING // change status to Processing to avoid interruption
-    
+    await processBatchJob(); // Process request one by one
+}
+
+processBatchJob = async () => {
+    // Run Job
+    for(const request of batchQueue) {
+        await request.runJob();
+    }
 }
