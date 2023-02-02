@@ -11,6 +11,12 @@ let batchStatus = Constants.IDLE; //store current batch status
 exports.monitorQueue = async (queue) => {
     //If Batch is in idle state then only proceed further
     if(batchStatus === Constants.IDLE) {
-
+        await pushToBatchQueue(queue);
     }
+}
+
+pushToBatchQueue = async (queue) => {
+    let spaceRemaining = process.env.BATCH_SIZE - batchQueue.length; //calculate space remaining to push into batch queue
+    let noOfJobsToPush = Math.min(queue.length, spaceRemaining); //
+
 }
