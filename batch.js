@@ -34,12 +34,19 @@ getNoOfSeconds = async () => {
 
 processBatchRequests = async (queue) => {
     batchStatus = Constants.PROCESSING // change status to Processing to avoid interruption
-    await processBatchJob(); // Process request one by one
+    await processBatchJob() // Process request one by one
+    await clearBatchQueue() // Clear Batch after Processing
+    lastBatchProcessingTime = Date.now() // update batch processing time
+    batchStatus = Constants.IDLE // change status to Idle to start batch process again
 }
 
 processBatchJob = async () => {
     // Run Job
     for(const request of batchQueue) {
-        await request.runJob();
+        await request.runJob()
     }
+}
+
+clearBatchQueue = async () => {
+    batchQueue.splice(0, batchQueue.length)
 }
